@@ -1,5 +1,5 @@
 // import ProductList, { ProductsSkeleton } from "@/components/ProductList"
-import ProductListWithSWR from "@/components/ProductListWithSWR"
+import ProductListWithSWR from "@/app/components/ProductListWithSWR"
 // import { Suspense } from "react"
 // import { Product } from "@/types"
 

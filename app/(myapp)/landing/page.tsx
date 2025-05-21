@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar"
+import Navbar from "@/app/components/Navbar"
 import Image from "next/image"
 import { The_Girl_Next_Door } from "next/font/google"
 
