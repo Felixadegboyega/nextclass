@@ -17,7 +17,7 @@ const AdminLayout = ({
           <Link
             key={each.path}
             className="bg-white/10 rounded-lg px-3 py-2 text-white"
-            href={each.path}
+            href={"/admin/" + each.path}
           >
             {each.label}
           </Link>

@@ -1,11 +1,32 @@
 "use server";
 
 import { CreatePost } from "@/types";
-import { redirect } from "next/navigation";
+import dbConnect from "../dbConnect";
+import { PostModel } from "../models/post";
 
 export const createPost = async (data: CreatePost) => {
-	console.log(data)
-	redirect("/admin/posts")
+	await dbConnect();
+
+	try {
+		const response = await PostModel.create({
+			more: data.body,
+			title: data.title
+		})
+
+		return {
+			success: true,
+			message: "Post added successfully",
+			data: response
+		}
+	} catch (error) {
+		return {
+			error,
+			message: "An error occured",
+			success: false
+		}
+	}
+
+	// redirect("/admin/posts")
 }
 
 // export const createPost = async (formData: FormData) => {

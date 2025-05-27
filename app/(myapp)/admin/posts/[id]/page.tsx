@@ -1,0 +1,46 @@
+import { PostModel } from "@/app/models/post"
+
+const getPost = async (id: string) => {
+  return await PostModel.findById(id)
+}
+
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params
+  const post = await getPost(id)
+
+  return (
+    <div>
+      <div>{post.title}</div>
+      <div>{post.more}</div>
+    </div>
+  )
+}
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) => {
+  const { id } = await params
+  const post = await getPost(id)
+
+  return {
+    title: post.title,
+    description: post.more,
+    openGraph: {
+      title: post.title,
+      description: post.more,
+      url: "https://nextjs.org",
+      siteName: "Next Class",
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1748183346959-dfeec5ade5d9?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Must be an absolute URL
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+  }
+}
+
+export default page

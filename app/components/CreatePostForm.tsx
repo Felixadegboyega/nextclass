@@ -1,10 +1,12 @@
 "use client"
 import { FormEvent, useRef, useState } from "react"
 import { createPost } from "../lib/actions"
+import { useRouter } from "next/navigation"
 
 const CreatePostForm = () => {
   const titleRef = useRef<HTMLInputElement>(null)
   const bodyRef = useRef<HTMLTextAreaElement>(null)
+  const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -15,8 +17,13 @@ const CreatePostForm = () => {
     const body = bodyRef.current?.value
     if (title && body) {
       setIsLoading(true)
-      await createPost({ title, body })
 
+      const response = await createPost({ title, body })
+      if (response.success) {
+        router.push("/admin/posts")
+      } else {
+        alert(response.message)
+      }
       setIsLoading(false)
     }
   }
