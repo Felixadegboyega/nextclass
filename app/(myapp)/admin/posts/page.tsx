@@ -1,7 +1,9 @@
+import dbConnect from "@/app/dbConnect"
 import { PostModel } from "@/app/models/post"
 import Link from "next/link"
 
 const page = async () => {
+  await dbConnect()
   const data = await PostModel.find()
 
   return (

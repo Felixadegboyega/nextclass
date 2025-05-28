@@ -1,5 +1,3 @@
-export const Page = () => {
-  return <div>Admin Page</div>
+export default function page() {
+  return <div>Admin page</div>
 }
-
-export default Page

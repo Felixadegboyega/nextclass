@@ -1,9 +1,9 @@
-import { model, models, Schema } from "mongoose";
+import { Document, Model, model, models, Schema } from "mongoose";
 
-interface IPost {
+export interface IPost extends Document {
 	title: string
 	more: string
-	time: string
+	time: Date
 }
 
 const postSchema = new Schema<IPost>({
@@ -15,4 +15,4 @@ const postSchema = new Schema<IPost>({
 	}
 })
 
-export const PostModel = models.Post || model<IPost>('Post', postSchema);
+export const PostModel: Model<IPost> = models.Post || model<IPost>('Post', postSchema);

@@ -1,17 +1,32 @@
-import { PostModel } from "@/app/models/post"
+import dbConnect from "@/app/dbConnect"
+import { IPost, PostModel } from "@/app/models/post"
+import { notFound } from "next/navigation"
 
 const getPost = async (id: string) => {
-  return await PostModel.findById(id)
+  const post = await PostModel.findById(id)
+
+  return post
 }
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
-  const post = await getPost(id)
+  await dbConnect()
+  let post: IPost | null
+  try {
+    post = await getPost(id)
+    if (!post) {
+      notFound()
+    }
+  } catch (error) {
+    console.log(error)
+    notFound()
+  }
 
   return (
     <div>
-      <div>{post.title}</div>
-      <div>{post.more}</div>
+      <div>{post?.title}</div>
+      <div>{post?.more}</div>
+      <div>{post?.time.toDateString()}</div>
     </div>
   )
 }
@@ -22,14 +37,24 @@ export const generateMetadata = async ({
   params: Promise<{ id: string }>
 }) => {
   const { id } = await params
-  const post = await getPost(id)
+  let post: IPost | null
+
+  try {
+    post = await getPost(id)
+    if (!post) {
+      notFound()
+    }
+  } catch (error) {
+    console.log(error)
+    notFound()
+  }
 
   return {
-    title: post.title,
-    description: post.more,
+    title: post?.title,
+    description: post?.more,
     openGraph: {
-      title: post.title,
-      description: post.more,
+      title: post?.title,
+      description: post?.more,
       url: "https://nextjs.org",
       siteName: "Next Class",
       images: [
