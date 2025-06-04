@@ -52,6 +52,7 @@ export const generateMetadata = async ({
   return {
     title: post?.title,
     description: post?.more,
+    // keywords:[""],
     openGraph: {
       title: post?.title,
       description: post?.more,

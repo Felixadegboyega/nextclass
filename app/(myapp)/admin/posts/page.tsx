@@ -1,14 +1,13 @@
-import dbConnect from "@/app/dbConnect"
-import { PostModel } from "@/app/models/post"
-import Link from "next/link"
+import { PostList } from "@/app/components/PostList"
 
 const page = async () => {
-  await dbConnect()
-  const data = await PostModel.find()
+  // await dbConnect()
+  // const data = await PostModel.find();
 
   return (
     <div>
-      {data?.map((each) => (
+      Server Here
+      {/* {data?.map((each) => (
         <Link
           href={"/admin/posts/" + each.id}
           key={each.id}
@@ -16,7 +15,8 @@ const page = async () => {
         >
           {each.title}
         </Link>
-      ))}
+      ))} */}
+      <PostList />
     </div>
   )
 }
