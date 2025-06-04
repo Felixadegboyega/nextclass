@@ -3,14 +3,24 @@
 import { CreatePost } from "@/types";
 import dbConnect from "../dbConnect";
 import { PostModel } from "../models/post";
+import { verifyUser } from "./auth";
 
 export const createPost = async (data: CreatePost) => {
+	const user = await verifyUser();
+	if (!user) {
+		return {
+			success: false,
+			message: "ddddd"
+		}
+	}
+
 	await dbConnect();
 
 	try {
 		const response = await PostModel.create({
 			more: data.body,
-			title: data.title
+			title: data.title,
+			// author: user._id
 		})
 
 		return {
