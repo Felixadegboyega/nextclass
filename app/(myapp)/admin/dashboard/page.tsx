@@ -1,12 +1,11 @@
-// import ProductList, { ProductsSkeleton } from "@/components/ProductList"
-import ProductListWithSWR from "@/app/components/ProductListWithSWR"
-// import { Suspense } from "react"
+import ProductList, { ProductsSkeleton } from "@/app/components/ProductList"
+import { Suspense } from "react"
 // import { Product } from "@/types"
 
 const page = async () => {
-  // const products = fetch("https://api.vercel.app/products").then((res) =>
-  //   res.json()
-  // )
+  const products = fetch("https://api.vercel.app/products").then((res) =>
+    res.json()
+  )
 
   return (
     <div>
@@ -19,10 +18,10 @@ const page = async () => {
           {each.name}
         </div>
       ))} */}
-      {/* <Suspense fallback={<ProductsSkeleton />}>
+      <Suspense fallback={<ProductsSkeleton />}>
         <ProductList products={products} />
-      </Suspense> */}
-      <ProductListWithSWR />
+      </Suspense>
+      {/* <ProductListWithSWR /> */}
     </div>
   )
 }

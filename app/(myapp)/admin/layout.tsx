@@ -1,4 +1,3 @@
-import { verifyUser } from "@/app/lib/auth"
 import Link from "next/link"
 
 const AdminLayout = async ({
@@ -6,12 +5,12 @@ const AdminLayout = async ({
 }: Readonly<{
   children: React.ReactNode
 }>) => {
-  const user = await verifyUser()
+  // const user = await verifyUser()
 
   return (
     <div className="flex gap-5">
       <div className="h-screen flex flex-col w-40 bg-slate-800 gap-2 p-5">
-        <h3 className="text-white">{user?.firstname}</h3>
+        {/* <h3 className="text-white">{user?.firstname}</h3> */}
         {[
           { label: "Dashboard", path: "dashboard" },
           { label: "Transactions", path: "transactions" },
